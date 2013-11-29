@@ -1,0 +1,399 @@
+<?xml version="1.0" ?>
+<default_objects>
+	<object type="html" template="about_us-400-body.tpl">
+		<pages>
+			<page>
+				<channelName>aboutus</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="accessibility-400-body.tpl">
+		<pages>
+			<page>
+				<channelName>accessibility</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="BMD_BoR_text_panel-485-body.tpl">
+		<pages>
+			<page>
+				<channelName>bookofremembrance</channelName>
+				<fileName>index.cfm</fileName>
+				<container>list-top</container>
+				<position>1</position>
+				<method>blank</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="BMD_BoR_text_panel-485-body.tpl">
+		<pages>
+			<page>
+				<channelName>editorialbooks</channelName>
+				<fileName>index.cfm</fileName>
+				<container>list-top</container>
+				<position>1</position>
+				<method>blank</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="BMD_BoR_text_panel-485-body.tpl">
+		<pages>
+			<page>
+				<channelName>lightacandle</channelName>
+				<fileName>index.cfm</fileName>
+				<container>list-top</container>
+				<position>1</position>
+				<method>blank</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="BMD_centre_charities-200-body.tpl">	
+		<pages>
+			<page>
+				<channelName>charitableDonations</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="BMD_centre_counselling-400-body.tpl">	
+		<pages>
+			<page>
+				<channelName>counselling</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>	
+	</object>
+	
+	<object type="html" template="BMD_centre_remembrance_notice-200-body.tpl">	
+		<pages>
+			<page>
+				<channelName>sympathyNote</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>	
+	</object>
+	
+	<object type="html" template="BMD_charity_box-200-body.tpl">
+		<pages>
+			<page>
+				<channelName>root</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>3</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="BMD_counselling_box-200-body.tpl">
+		<pages>
+			<page>
+				<channelName>root</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>4</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="BMD_remembranceGifts_box-200-body.tpl">
+		<pages>
+			<page>
+				<channelName>root</channelName>
+				<fileName>index.cfm</fileName>
+				<container>left</container>
+				<position>3</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="contact_us-400-body.tpl">
+		<pages>
+			<page>
+				<channelName>contactus</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="flash_front_page-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>root</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+			
+			<page>
+				<channelName>aboutus</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+			
+			<page>
+				<channelName>accessibility</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+			
+			<page>
+				<channelName>privacy</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+			
+			<page>
+				<channelName>contactus</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+			
+			<page>
+				<channelName>terms</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+			
+			<page>
+				<channelName>viewremembrancealbum</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="flash_header_charities_08-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>charitableDonations</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="flash_header_counselling_05-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>counselling</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="flash_header_create_rem_03-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>remembranceAlbum</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="flash_header_fun_search_06-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>funeralServices</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="flash_header_gifts_07-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>remembranceGifts</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="flash_header_place_rem_02-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>sympathyNote</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="flash_header_view_books_09-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>bookofremembrance</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="home_page_flash_header-705-body.tpl">
+		<pages>
+			<page>
+				<channelName>sitemap</channelName>
+				<fileName>index.cfm</fileName>
+				<container>header-column</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="privacy-400-body.tpl">
+		<pages>
+			<page>
+				<channelName>privacy</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="html" template="TsandCs-400-body.tpl">
+		<pages>
+			<page>
+				<channelName>terms</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>	
+	
+	<object type="html" template="welcome_centre_column-458-body.tpl">
+		<pages>
+			<page>
+				<channelName>root</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>2</position>
+				<method>noformat</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="widget" index="1">
+		<pages>
+			<page>
+				<channelName>root</channelName>
+				<fileName>index.cfm</fileName>
+				<container>right</container>
+				<position>1</position>
+				<method>default</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="widget" index="2">	
+		<pages>
+			<page>
+				<channelName>funeralServices</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>default</method>
+			</page>
+		</pages>	
+	</object>
+	
+	<object type="widget" index="3">
+		<pages>
+			<page>
+				<channelName>root</channelName>
+				<fileName>index.cfm</fileName>
+				<container>right</container>
+				<position>2</position>
+				<method>default</method>
+			</page>
+		</pages>
+	</object>
+	
+	<object type="widget" index="4">
+		<pages>
+			<page>
+				<channelName>root</channelName>
+				<fileName>index.cfm</fileName>
+				<container>left</container>
+				<position>1</position>
+				<method>default</method>
+			</page>
+		</pages>
+	</object>
+		
+	<object type="widget" index="5">
+		<pages>
+			<page>
+				<channelName>remembranceGifts</channelName>
+				<fileName>index.cfm</fileName>
+				<container>centre</container>
+				<position>1</position>
+				<method>default</method>
+			</page>
+		</pages>
+	</object>	
+		
+</default_objects>

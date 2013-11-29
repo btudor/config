@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="0.3">
+	<xs:include schemaLocation="/dmcms/config/validation/FISH4IF-types-20.xsd"/>
+	<xs:element name="FISH4.IF.JOB">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="HEAD" type="head"/>
+				<xs:element name="OBJECT" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OBJECT_HEAD" type="objecthead"/>
+							<xs:element name="JOB">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="LOCATION_JOB" type="locationjobs">
+											<xs:annotation>
+												<xs:documentation>SUBTOWN or TOWN are a mandatory requirement per object</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="JOB_TITLE" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>55 characters (alpha numeric), no HTML, neither asterisks' nor quotes</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="INDUSTRY_SECTOR" type="industrysector" maxOccurs="5">
+											<xs:annotation>
+												<xs:documentation>It must be a value from the enumeration [agriculture, banking, catering, construction, custserv, distribution, driving, health, hr, legal, manufacturing, marketing, media, pubsector, sales, scientific, secretarial, security, retail, engineering, accounting, domestic, eduttrain, hosptraveltourism, it, automotive, charity, other]</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="JOBTYPE" type="jobtype">
+											<xs:annotation>
+												<xs:documentation>It must be a value from the enumeration [consultancy, temporary, permanent, fixedcontract]</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="WORKING_HOURS" type="workinghours">
+											<xs:annotation>
+												<xs:documentation>It must be a value from the enumeration [parttime, fulltime]</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="SALARY_MODEL" type="salarymodel"/>
+										<xs:element name="BENEFITS" type="xs:string" minOccurs="0"/>
+										<xs:element name="SUMMARY_JOB_DESCRIPTION" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Summary job details and description, description truncated at 250 characters; no Java Script or HTML</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="FULL_JOB_DESCRIPTION" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Job details and description 10,000 characters maximum; no Java Script</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="APPLICATION_METHOD" type="appmethod" maxOccurs="6">
+											<xs:annotation>
+												<xs:documentation>It must be a value from the enumeration [email, post, phone, fax, external]</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="APPLICATION" type="application">
+											<xs:annotation>
+												<xs:documentation>If an application method is provided then the corresponding element and CONTACT_NAME must be supplied</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="ADVERT_URL" type="adverturl" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Must be a valid absolute URL</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="ADVERTISER_WEB_SITE" type="advertiserwebsite" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Must be a valid absolute URL</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="CAMPAIGN_PROVIDER_ID" type="xs:string" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Must be the organisation identification number provided by fish4</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="COMPANY">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="COMPANY_NAME" type="xs:string" minOccurs="0"/>
+												</xs:sequence>
+												<xs:attribute name="SHOW_ADVERTISER" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:NMTOKEN">
+															<xs:enumeration value="yes"/>
+															<xs:enumeration value="no"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="SHOW_CAMPAIGN" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:NMTOKEN">
+															<xs:enumeration value="yes"/>
+															<xs:enumeration value="no"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

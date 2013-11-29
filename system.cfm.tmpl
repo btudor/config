@@ -1,0 +1,175 @@
+<!---
+	$Id: system.cfm.tmpl 67936 2011-12-15 14:43:37Z zislam $
+	$URL: http://10.134.130.120/svn/CodeDB/trunk/config/system.cfm.tmpl $
+
+	Copy to system.cfm and edit on each machine.
+	Sets Server & Application variables.
+
+	Parameters:
+		attributes.scope - if 'global' set server vars, otherwise application vars.
+			for older regional sites, APG related application variables are also set
+			here when attributes.scope matches the sitename.
+--->
+
+<cfscript>
+// set the platform environment type variable
+variables.platformEnv = "tm_config_environment";
+
+if (attributes.scope eq "global") {
+	// GLOBAL SERVER VARIABLES
+	if (CGI.HOST_NAME Contains "tmgcms.tm-gnet.com" ){
+		SERVER.cms.S_SERVER_TYPE = "cms";
+	} else {
+		SERVER.cms.S_SERVER_TYPE = "internet";
+	}
+
+	SERVER.CMS.icnetwork_url = "/icnetwork";
+	SERVER.cms.jobsite_template = 'jobstemplate';
+	SERVER.cms.datahub_shared_link = 'PCMS';
+	SERVER.cms.proccachedir = "/src/webroot/cachedprocs";
+	SERVER.cms.cacheprocs = 1;
+	SERVER.cms.s_cfuser = "apache";
+	SERVER.cms.intranet_home_url_link="/intranet/home";
+	SERVER.cms.manage_messages = "/cms/manage_objects/messageboard/message_edit.cfm?type=0&object_id=";
+	SERVER.cms.env_type = "development";
+	SERVER.cms.serverID = tm_server_id;
+	// get an API key from http://code.google.com/apis/maps/signup.html for the hostname you need
+	SERVER.CMS.google_maps_api_key = 'ABQIAAAAA4JuJueVQGtD67IpzI7O1RQIKETGW6cf79v2CR4lOliEufV5uxSf9ZXYsk96828e4eqx1mUqcTbCKg';  // for domain http://nmvm1/
+	SERVER.cms.S_WEBROOT = "/cms"; 
+	SERVER.cms.S_METHOD_DIR = "/methods";
+	SERVER.cms.S_NETWORKROOT = "/src/webroot";
+	SERVER.cms.s_image_fileroot = "/src/webroot/images";
+	SERVER.cms.SHARED_DATASOURCE = "shared";
+	SERVER.cms.SESSIONLENGTHMINS = 300;
+	SERVER.cms.application_release = "v2";
+	SERVER.cms.cache_home = "/src/pagecache/";
+	SERVER.cms.cache_tmp_dir = "/src/cachetmp/";
+	SERVER.cms.s_mailserver = "lnproduction1cw";
+	SERVER.cms.s_mailport = 25;
+	SERVER.cms.s_faxdomain = "faxramp.com";
+	SERVER.cms.s_vicinity_database = "ATRIUM";
+	SERVER.cms.s_vicinity_url = "www.vicinity.com";
+	SERVER.cms.s_log_file = "/log/portal_log";
+	SERVER.cms.datahub_datasource="cfapp";//datahub datasource
+	SERVER.cms.apglogdir = "/src/webroot/cms/apg/apglogs";
+	SERVER.cms.apgconfigdir = "/src/webroot/cms/apg/config";
+	SERVER.cms.apgimagedir = "/src/webroot/cms/apg/images";
+	SERVER.cms.apgcssdir = "/src/webroot/cms/apg/stylesheets";
+	SERVER.cms.apgmode = "750";
+	SERVER.cms.apgimagemode = "640";
+	SERVER.cms.icregion_db_schema = "icregion";
+	SERVER.cms.intranet_datasource="intranet";
+	SERVER.cms.intranet_home_url="/intranet";
+	SERVER.cms.intranet_root="/src/webroot/intranet";
+	SERVER.cms.public_imageserver = "/images";
+	SERVER.cms.intranet_domain = ".tm-gnet.com";
+	SERVER.cms.ldap_ipaddress = "10.134.6.32";
+	SERVER.cms.widgetdeffiledir = "/src/webroot/images/widget_files";
+	SERVER.cms.widgetuplfiledir = "/src/webroot/cms/manage_objects/widget/widget_file_uploads";
+	SERVER.cms.widgetfilemode = "640";
+	SERVER.cms.notes1_ipaddress = "10.134.9.130";
+
+	//tile ad server setting
+	SERVER.cms.tile_ad = StructNew();
+	SERVER.cms.tile_ad.image_page="/images/upl";
+
+	// SERVER.cms.s_error_handler_root = "/src/webroot/errors";
+	
+	//caching settings - IGNORED FOR CMS box
+	SERVER.cms.st_cache = structNew();
+    //number of sub-directories in each pagecfms4xxx cache directory
+    SERVER.cms.st_cache.num_pagecfms_subdirs = 20;
+
+    //Time span for which cache files are valid - (days,hours,minutes,seconds)
+    SERVER.cms.st_cache.tempfile_expire = CreateTimeSpan(7,0,0,0);
+
+    //do cache logging
+    SERVER.cms.st_cache.b_log = 1;
+
+    //cache flush method - 'contact' or 'direct'
+    SERVER.cms.st_cache.flush_method = "contact";
+    //location of file that contains list of pages that have caused errors
+    SERVER.cms.s_error_file = "/src/webroot/cfcache_files/errorstatus";
+
+	// SERVER.cms.st_cache.timeout_mins = 5;
+	SERVER.cms.st_cache.b_use_caching = false;
+	SERVER.cms.st_cache.cachedirectory = "/src/webroot/cfcache_files";
+	SERVER.cms.st_cache.browser_timeout = 5; // minutes for browser to cache a page
+	SERVER.cms.st_cache.b_debug =false;
+
+	// initialise structure for storing pages to be re-cached
+	SERVER.cms.st_reCachePages = structNew();
+
+	SERVER.cms.st_cache.file2StoreCacheStatus = "/src/webroot/cfcache_files/cachestatus";
+	SERVER.cms.st_cache.d_first_request = now();
+	//initialize structure for sites that have been checked for re-cache
+	SERVER.cms.st_cache.st_done_sites = structNew();
+
+	//auto publishing setting
+	SERVER.cms.n_autopub_userid = 11000600;
+
+    //variable state settings - for loading of server & application vars
+    SERVER.cms.variable_state_dir = "/src/webroot/variable_state"; //variable state directory
+
+    SERVER.objcachedir = "/var/cache/objcache";
+    SERVER.cacheobjects = 1;
+    SERVER.cms.querycachedir = "/src/webroot/cachedqueries";
+    SERVER.cms.cachequeries = 1;
+    SERVER.cms.useMemcachedQuery = true;
+    SERVER.cms.useMemcachedObject = true;
+    SERVER.cms.useMemcachedPage = true;        
+    SERVER.cms.querydefaultblockfactor = 1;
+	SERVER.cms.icregion_db_schema = "icregion";
+	SERVER.cms.queueReplication = 1;	
+	
+	// for document uploads
+	SERVER.cms.s_document_fileroot = "/src/webroot/images/docs";
+
+	// for classified images
+	server.cms.s_classified_imageroot = "/src/webroot/images/classified/gc";
+
+    // switch to allow msp for all, or a select group only
+    SERVER.cms.msp = StructNew();
+    SERVER.cms.msp.active = 1;
+    SERVER.cms.msp.allowed_users = "11002200,11002201,11002202";
+	server.cms.icme_domain = ".icnetwork.co.uk";
+	server.cms.icme_site = "http://icme.icnetwork.co.uk";
+
+	//CU settings
+	SERVER.cms.cu_datasource = "clientupdate";
+	SERVER.cms.cu_replication_url = "http://192.168.246.86/replication/cu_replication.cfm";
+	SERVER.cms.b_clientupdate_allowed = 1;
+	server.cms.resultsetcachedir = "/var/cache/resultset";
+	SERVER.cms.username192 = "mgnrollout";
+	SERVER.cms.password192 = "test";
+	SERVER.cms.icnetworkmapurl = "http://www.icnetwork.co.uk/remote/maps_directions/requestMap.cfm";
+	server.cms.datahub_user_id = 90;
+	// serve all of the css from below this URL 
+	server.css_url = "http://10.134.130.83/images/css/";
+
+} else {
+	// GLOBAL APPLICATION VARIABLES
+	application.S_IMAGESERVER = "http://10.134.130.83/images";
+	application.GRAPHICS_PATH = "http://10.134.130.83/images/design";
+			
+ 	//a&e variable
+	application.s_ae_maxvicinityrecords = 50;
+
+	// END OF SETTING GLOBAL APPLICATION VARIABLES
+
+	switch(attributes.scope) {
+		case "icliverpool" : {
+			// START OF SETTING ICLiverpool APPLICATION VARIABLES
+
+			//files to include in database generated application variables
+			application.st_toInclude = structNew();
+			application.st_toInclude[1] = "setAEApplicationVars.cfm";
+			application.st_toInclude[2] = "setBDApplicationVars.cfm";
+			application.st_toInclude[3] = "setRegionalApplicationVars.cfm";
+			application.st_toInclude[4] = "seticliverpoolApplicationVars.cfm";
+			// END OF SETTING ICLiverpool APPLICATION VARIABLES
+			break;
+		}
+	}
+}
+</cfscript>

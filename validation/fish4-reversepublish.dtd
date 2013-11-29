@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT feed (header,adverts)>
+	<!ELEMENT header (template,process_date,recipients,description,publication)>
+		<!ELEMENT template (#PCDATA)>
+		<!ELEMENT publication (#PCDATA)>
+		<!ELEMENT process_date (#PCDATA)>
+		<!ELEMENT recipients (email+)>
+			<!ELEMENT email (#PCDATA)>
+		<!ELEMENT description (#PCDATA)>
+	<!ELEMENT adverts (advert)+>
+		<!ELEMENT advert (working_hours,job_title,advertiser_name,location_job,salary_text,summary_job_description,orderno,industry_sector)>
+			<!ATTLIST advert job_number CDATA #REQUIRED>
+			<!ELEMENT working_hours (#PCDATA)>
+			<!ELEMENT job_title (#PCDATA)>
+			<!ELEMENT advertiser_name (#PCDATA)>
+			<!ELEMENT location_job (#PCDATA)>
+			<!ELEMENT salary_text (#PCDATA)>
+			<!ELEMENT summary_job_description (#PCDATA)>
+			<!ELEMENT orderno (#PCDATA)>
+			<!ELEMENT industry_sector (#PCDATA)>

@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="0.3">
+	<xs:simpleType name="emptystring">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="nullablelong">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:unsignedLong"/>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="provided">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\w\W\s]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="adverturl">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="(https?://)?[0-9_\-a-zA-Z]+[\.(0-9_\-a-zA-Z)+]+\.[0-9_\-a-zA-Z]+.*"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="advertiserwebsite">
+		<xs:restriction base="adverturl"/>
+	</xs:simpleType>
+	<xs:simpleType name="price">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(\.[0-9]{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="minimumprice">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(\.[0-9]{1,2})?"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="maximumprice">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(\.[0-9]{1,2})?"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="_price">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[0-9]+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="unitprice">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[0-9]+[kK]?"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:complexType name="head">
+		<xs:sequence>
+			<xs:element name="UPLOADER_ID" type="xs:string"/>
+			<xs:element name="ORIG_FILENAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="FILE_REFERENCE" type="xs:string"/>
+			<xs:element name="EMAIL_FEEDBACK" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[\w\._\-]*@([\w_\-]{2,}\.)+[\w]{2,}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FEEDBACK_LEVEL" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="objectheadhomesforrent">
+		<xs:sequence>
+			<xs:element name="PUBLICATION_ID" type="xs:string"/>
+			<xs:element name="ADVERTISER_ID" type="xs:string"/>
+			<xs:element name="ORDERNO">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9A-Z]+(-|_)[0-9A-Z]+(-|_*)[0-9A-Za-z*]+(-|_*)[0-9A-Za-z]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ADVERTISER_REFERENCE" type="xs:string"/>
+			<xs:element name="PROVIDER_REFERENCE" type="xs:string"/>
+			<xs:element name="THIRDPART_REFERENCE" type="xs:string" minOccurs="0"/>
+			<xs:element name="FROMDATE">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TODATE">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PRIVATE_TRADE">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="INDICATOR" use="required">
+								<xs:simpleType>
+									<xs:restriction base="xs:NMTOKEN">
+										<xs:enumeration value="t"/>
+										<xs:enumeration value="p"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="objectheadhomesforsale">
+		<xs:sequence>
+			<xs:element name="PUBLICATION_ID" type="xs:string"/>
+			<xs:element name="ADVERTISER_ID" type="xs:string"/>
+			<xs:element name="ORDERNO">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9A-Z]+(-|_)[0-9A-Z]+(-|_*)[0-9A-Za-z*]+(-|_*)[0-9A-Za-z]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ADVERTISER_REFERENCE" type="xs:string"/>
+			<xs:element name="PROVIDER_REFERENCE" type="xs:string"/>
+			<xs:element name="THIRDPART_REFERENCE" type="xs:string" minOccurs="0"/>
+			<xs:element name="FROMDATE">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TODATE">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PRIVATE_TRADE">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="INDICATOR" use="required">
+								<xs:simpleType>
+									<xs:restriction base="xs:NMTOKEN">
+										<xs:enumeration value="t"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="objecthead">
+		<xs:sequence>
+			<xs:element name="PUBLICATION_ID" type="xs:string"/>
+			<xs:choice>
+				<xs:element name="ADVERTISER_ID" type="xs:string"/>
+				<xs:element name="EMAIL_PRODUCT">
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="NAME" use="required">
+									<xs:simpleType>
+										<xs:restriction base="xs:NMTOKEN">
+											<xs:enumeration value="basic"/>
+											<xs:enumeration value="extra"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="ORDERNO">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9A-Z]+(-|_)[0-9A-Z]+(-|_*)[0-9A-Za-z*]+(-|_*)[0-9A-Za-z]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ADVERTISER_REFERENCE" type="xs:string"/>
+			<xs:element name="PROVIDER_REFERENCE" type="xs:string"/>
+			<xs:element name="THIRDPART_REFERENCE" type="xs:string" minOccurs="0"/>
+			<xs:element name="FROMDATE">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TODATE">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PRIVATE_TRADE">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="INDICATOR" use="required">
+								<xs:simpleType>
+									<xs:restriction base="xs:NMTOKEN">
+										<xs:enumeration value="t"/>
+										<xs:enumeration value="p"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="urn">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Z]+(-|_)[0-9A-Z]+(-|_*)[0-9A-Za-z*]+(-|_*)[0-9A-Za-z]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="startdate">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="enddate">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="currency">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GBP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="poaindicator">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="yes"/>
+			<xs:enumeration value="no"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="landsizeunits">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="sqm"/>
+			<xs:enumeration value="sqf"/>
+			<xs:enumeration value="sqyd"/>
+			<xs:enumeration value="acres"/>
+			<xs:enumeration value="hectares"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ownershiptype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="freehold"/>
+			<xs:enumeration value="leasehold"/>
+			<xs:enumeration value="sharefreehold"/>
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="propertystatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="available"/>
+			<xs:enumeration value="soldcontract"/>
+			<xs:enumeration value="underoffer"/>
+			<xs:enumeration value="saleagreed"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="commercialsizeunits">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="sqm"/>
+			<xs:enumeration value="sqf"/>
+			<xs:enumeration value="sqyd"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="industrysector">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="agriculture"/>
+			<xs:enumeration value="banking"/>
+			<xs:enumeration value="catering"/>
+			<xs:enumeration value="construction"/>
+			<xs:enumeration value="custserv"/>
+			<xs:enumeration value="distribution"/>
+			<xs:enumeration value="driving"/>
+			<xs:enumeration value="health"/>
+			<xs:enumeration value="hr"/>
+			<xs:enumeration value="legal"/>
+			<xs:enumeration value="manufacturing"/>
+			<xs:enumeration value="marketing"/>
+			<xs:enumeration value="media"/>
+			<xs:enumeration value="pubsector"/>
+			<xs:enumeration value="sales"/>
+			<xs:enumeration value="scientific"/>
+			<xs:enumeration value="secretarial"/>
+			<xs:enumeration value="security"/>
+			<xs:enumeration value="retail"/>
+			<xs:enumeration value="other"/>
+			<xs:enumeration value="engineering"/>
+			<xs:enumeration value="accounting"/>
+			<xs:enumeration value="domestic"/>
+			<xs:enumeration value="eduttrain"/>
+			<xs:enumeration value="hosptraveltourism"/>
+			<xs:enumeration value="it"/>
+			<xs:enumeration value="automotive"/>
+			<xs:enumeration value="charity"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="jobtype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="consultancy"/>
+			<xs:enumeration value="temporary"/>
+			<xs:enumeration value="permanent"/>
+			<xs:enumeration value="fixedcontract"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="workinghours">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="parttime"/>
+			<xs:enumeration value="fulltime"/>
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="salarymodel">
+		<xs:sequence>
+			<xs:element name="SALARY_TEXT" type="xs:string"/>
+			<xs:element name="SALARY_FREQUENCY" type="salaryfrequency"/>
+			<xs:element name="MINIMUM_SALARY" type="price"/>
+			<xs:element name="MAXIMUM_SALARY" type="price"/>
+			<xs:element name="CURRENCY">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="GBP"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="salaryfrequency">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="perhour"/>
+			<xs:enumeration value="perday"/>
+			<xs:enumeration value="perweek"/>
+			<xs:enumeration value="permonth"/>
+			<xs:enumeration value="peryear"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="appmethod">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:enumeration value="email"/>
+			<xs:enumeration value="post"/>
+			<xs:enumeration value="phone"/>
+			<xs:enumeration value="online"/>
+			<xs:enumeration value="fax"/>
+			<xs:enumeration value="external"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="rentpropertytype">
+		<xs:union memberTypes="salepropertytype">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="houseshare"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="rentalfrequency">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="week"/>
+			<xs:enumeration value="month"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="furnished">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="furnished"/>
+			<xs:enumeration value="unfurnished"/>
+			<xs:enumeration value="partfurnished"/>
+			<xs:enumeration value="furnishedorunfurnished"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="salepropertytype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="detached"/>
+			<xs:enumeration value="semidetached"/>
+			<xs:enumeration value="flat"/>
+			<xs:enumeration value="houseother"/>
+			<xs:enumeration value="bungalow"/>
+			<xs:enumeration value="other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="noofbedrooms">
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="studio"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:unsignedShort">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="10"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="noofbathrooms">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:unsignedByte">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="3"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="noofreceptionrooms">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:unsignedByte">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="3"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="garden">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="garden"/>
+			<xs:enumeration value="balcony"/>
+			<xs:enumeration value="roofgarden"/>
+			<xs:enumeration value="other"/>
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="parking">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="garage"/>
+			<xs:enumeration value="offroad"/>
+			<xs:enumeration value="other"/>
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="availablefrom">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/]((19|20)[0-9]{2}|[0-9]{2})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="noofparkingspaces">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:unsignedByte">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="200"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="bodystyle">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="convertible"/>
+			<xs:enumeration value="coupe"/>
+			<xs:enumeration value="4x4"/>
+			<xs:enumeration value="estate"/>
+			<xs:enumeration value="saloon"/>
+			<xs:enumeration value="mpv"/>
+			<xs:enumeration value="hatchback"/>
+			<xs:enumeration value="roadster"/>
+			<xs:enumeration value="limousine"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="yearmodel">
+		<xs:sequence>
+			<xs:element name="LETTERS_OR_NUMBER_OF_REGISTRATION">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="\w*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="YEAR_OF_REGISTRATION" type="nullablelong"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="mileage">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(\.[0-9]{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="exteriorcolour">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="beige"/>
+			<xs:enumeration value="black"/>
+			<xs:enumeration value="blue"/>
+			<xs:enumeration value="bronze"/>
+			<xs:enumeration value="brown"/>
+			<xs:enumeration value="burgundy"/>
+			<xs:enumeration value="gold"/>
+			<xs:enumeration value="green"/>
+			<xs:enumeration value="grey"/>
+			<xs:enumeration value="indigo"/>
+			<xs:enumeration value="magnolia"/>
+			<xs:enumeration value="maroon"/>
+			<xs:enumeration value="navy"/>
+			<xs:enumeration value="orange"/>
+			<xs:enumeration value="pink"/>
+			<xs:enumeration value="purple"/>
+			<xs:enumeration value="red"/>
+			<xs:enumeration value="silver"/>
+			<xs:enumeration value="white"/>
+			<xs:enumeration value="yellow"/>
+			<xs:enumeration value="sand"/>
+			<xs:enumeration value="violet"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="noofdoors">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:minInclusive value="2"/>
+			<xs:maxInclusive value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="fueltype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="petrol"/>
+			<xs:enumeration value="diesel"/>
+			<xs:enumeration value="lpg"/>
+			<xs:enumeration value="electric"/>
+			<xs:enumeration value="cng"/>
+			<xs:enumeration value="hybrid"/>
+			<xs:enumeration value="flexiblefuel"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="transmission">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="manual"/>
+			<xs:enumeration value="automatic"/>
+			<xs:enumeration value="tiptronic"/>
+			<xs:enumeration value="cvt"/>
+			<xs:enumeration value="semiautomatic"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="carowners">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:unsignedByte">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="10"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="servicehistory">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="nsh"/>
+			<xs:enumeration value="psh"/>
+			<xs:enumeration value="fsh"/>
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="handdrive">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="rhd"/>
+			<xs:enumeration value="lhd"/>
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="approvalscheme">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="aa"/>
+			<xs:enumeration value="bmw"/>
+			<xs:enumeration value="mini"/>
+			<xs:enumeration value="rac"/>
+			<xs:enumeration value="sva"/>
+			<xs:enumeration value="none"/>
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="boattype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="canoe"/>
+			<xs:enumeration value="yacht"/>
+			<xs:enumeration value="speedboat"/>
+			<xs:enumeration value="narrowboat"/>
+			<xs:enumeration value="multihull"/>
+			<xs:enumeration value="dayboat"/>
+			<xs:enumeration value="dinghy"/>
+			<xs:enumeration value="other"/>
+			<xs:enumeration value="fishingboat"/>
+			<xs:enumeration value="motorcruiser"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="boatregistration">
+		<xs:restriction base="xs:unsignedShort">
+			<xs:minInclusive value="1900"/>
+			<xs:maxInclusive value="2012"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="application">
+		<xs:sequence>
+			<xs:element name="CONTACT_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="CONTACT_TELEPHONE" type="telephone"/>
+			<xs:element name="CONTACT_EMAIL_ADDRESS" type="emailaddress"/>
+			<xs:element name="CONTACT_FAX" type="telephone" minOccurs="0"/>
+			<xs:element name="APPLICATION_URL" type="url" minOccurs="0"/>
+			<xs:element name="APPLICATION_UNIT_NO" type="xs:string" minOccurs="0"/>
+			<xs:element name="APPLICATION_UNIT_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="APPLICATION_HOUSE_NO" type="xs:string" minOccurs="0"/>
+			<xs:element name="APPLICATION_ESTATE_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="APPLICATION_STREET_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="APPLICATION_SUBTOWN" type="xs:string" minOccurs="0"/>
+			<xs:element name="APPLICATION_TOWN" type="xs:string" minOccurs="0"/>
+			<xs:element name="APPLICATION_COUNTY" type="xs:string" minOccurs="0"/>
+			<xs:element name="APPLICATION_POSTCODE" type="postcode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="contact">
+		<xs:sequence>
+			<xs:element name="CONTACT_TELEPHONE_DAY" type="telephone" minOccurs="0"/>
+			<xs:element name="CONTACT_TELEPHONE_EVENING" type="telephone" minOccurs="0"/>
+			<xs:element name="CONTACT_TELEPHONE_MOBILE" type="telephone" minOccurs="0"/>
+			<xs:element name="CONTACT_EMAIL_ADDRESS" type="emailaddress" minOccurs="0"/>
+			<xs:element name="CONTACT_FAX" type="telephone" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="estatecontact">
+		<xs:sequence>
+			<xs:element name="CONTACT_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="CONTACT_TELEPHONE" type="telephone" minOccurs="0"/>
+			<xs:element name="CONTACT_EMAIL_ADDRESS" type="emailaddress" minOccurs="0"/>
+			<xs:element name="CONTACT_FAX" type="telephone" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="emailaddress">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[\w\._\-]*@([\w_\-]{2,}\.)+[\w]{2,}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="telephone">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\d ]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="url">
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="(https?://)?[0-9_\-a-zA-Z]+[\.(0-9_\-a-zA-Z)+]+\.[0-9_\-a-zA-Z]+.*"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="postcode">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY])))) [0-9][A-Z-[CIKMOV]]{2})"/>
+			<xs:pattern value="((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY])))) [0-9]){1}"/>
+			<xs:pattern value="((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKSTUW]){2}))))"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="optpostcode">
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY])))) [0-9][A-Z-[CIKMOV]]{2})"/>
+					<xs:pattern value="((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY])))) [0-9]){1}"/>
+					<xs:pattern value="((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKSTUW]){2}))))"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:list itemType="emptystring"/>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="showaddresslevel">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="nostreetpostcode"/>
+			<xs:enumeration value="nostreet"/>
+			<xs:enumeration value="nopostcode"/>
+			<xs:enumeration value="all"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="locationjobs">
+		<xs:sequence>
+			<xs:element name="FLAT_NO" type="xs:string" minOccurs="0"/>
+			<xs:element name="HOUSE_NO" type="xs:string" minOccurs="0"/>
+			<xs:element name="HOUSE_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="STREET_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="SUBTOWN" type="xs:string"/>
+			<xs:element name="TOWN" type="xs:string"/>
+			<xs:element name="COUNTY" type="xs:string" minOccurs="0"/>
+			<xs:element name="POSTCODE" type="optpostcode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="locationmotor">
+		<xs:sequence>
+			<xs:element name="FLAT_NO" type="xs:string" minOccurs="0"/>
+			<xs:element name="HOUSE_NO" type="xs:string" minOccurs="0"/>
+			<xs:element name="HOUSE_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="STREET_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="SUBTOWN" type="xs:string" minOccurs="0"/>
+			<xs:element name="TOWN" type="xs:string" minOccurs="0"/>
+			<xs:element name="COUNTY" type="xs:string" minOccurs="0"/>
+			<xs:element name="POSTCODE" type="postcode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="locationhomes">
+		<xs:sequence>
+			<xs:element name="FLAT_NO" type="xs:string" minOccurs="0"/>
+			<xs:element name="HOUSE_NO" type="xs:string" minOccurs="0"/>
+			<xs:element name="HOUSE_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="STREET_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="SUBTOWN" type="xs:string" minOccurs="0"/>
+			<xs:element name="TOWN" type="xs:string" minOccurs="0"/>
+			<xs:element name="COUNTY" type="xs:string" minOccurs="0"/>
+			<xs:element name="POSTCODE" type="postcode"/>
+			<xs:element name="SHOW_ADDRESS_LEVEL" type="showaddresslevel"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="locationdevelopments">
+		<xs:sequence>
+			<xs:element name="ESTATE_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="STREET_NAME" type="xs:string" minOccurs="0"/>
+			<xs:element name="SUBTOWN" type="xs:string" minOccurs="0"/>
+			<xs:element name="TOWN" type="xs:string"/>
+			<xs:element name="COUNTY" type="xs:string"/>
+			<xs:element name="POSTCODE" type="optpostcode"/>
+			<xs:element name="SHOW_ADDRESS_LEVEL" type="showaddresslevel"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
